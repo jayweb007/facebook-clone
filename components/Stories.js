@@ -11,7 +11,7 @@ const stories = [
   },
   {
     id: 3,
-    name: "Kelechi Ophara",
+    name: "Kelechi Ophara Fashion",
     src: "https://links.papareact.com/k2j",
     profile: "https://links.papareact.com/f0p",
   },

@@ -20,7 +20,10 @@ function StoryCard({ name, src, profile }) {
         layout="fill"
         className="object-cover cursor-pointer filter brightness-75 rounded-2xl lg:rounded-3xl "
       />
-      <p className="absolute z-50 top-[165px] left-0 right-0 px-1 self-center leading-tight text-left inline-block  text-white font-thin">
+      <p
+        className="absolute z-50 top-[150px] left-3 text-sm break-words 
+      lg:text-base lg:left-1 leading-tight text-white font-normal"
+      >
         {name}
       </p>
     </div>
