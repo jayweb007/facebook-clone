@@ -13,10 +13,12 @@ function Posts({ posts }) {
         ? realtimePosts?.docs.map((post) => (
             <Post
               key={post.id}
+              id={post.id}
               name={post.data().name}
               email={post.data().email}
               message={post.data().message}
               image={post.data().image}
+              likeicon={post.data().like}
               timestamp={post.data().timestamp}
               postImage={post.data().postImage}
             />
@@ -24,10 +26,12 @@ function Posts({ posts }) {
         : posts.map((post) => (
             <Post
               key={post.id}
+              id={post.id}
               name={post.name}
               email={post.email}
               message={post.message}
               image={post.image}
+              likeicon={post.like}
               timestamp={post.timestamp}
               postImage={post.postImage}
             />

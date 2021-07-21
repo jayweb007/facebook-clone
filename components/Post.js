@@ -7,9 +7,30 @@ import {
   ThumbUpIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import { db } from "../firebase";
 
-function Post({ name, email, message, image, timestamp, postImage }) {
+function Post({
+  id,
+  likeicon,
+  name,
+  email,
+  message,
+  image,
+  timestamp,
+  postImage,
+}) {
   const time = moment(timestamp?.toDate().getTime()).format("LLL");
+  const ref = db.collection("posts");
+
+  const likeButton = () => {
+    ref
+      .doc(id)
+      .update({ like: !likeicon })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <div className="flex flex-col">
@@ -69,9 +90,28 @@ function Post({ name, email, message, image, timestamp, postImage }) {
         className="flex pt-2 items-center justify-between shadow-md 
       rounded-b-2xl bg-white text-gray-400 "
       >
-        <div className="flex border-t border-gray-200 items-center space-x-1 hover:bg-gray-100 cursor-pointer p-1 sm:p-2 flex-grow rounded-bl-2xl justify-center">
-          <ThumbUpIcon className="h-4" />
-          <p className="text-xs sm:text-base">Like</p>
+        <div
+          onClick={likeButton}
+          className="flex border-t border-gray-200 items-center space-x-1 hover:bg-gray-100 cursor-pointer p-1 sm:p-2 flex-grow rounded-bl-2xl justify-center"
+        >
+          {likeicon ? (
+            <ThumbUpAltIcon
+              style={{ fontSize: 16 }}
+              className="text-blue-500 text-xs sm:text-base"
+            />
+          ) : (
+            // <ThumbUpAltIcon className="text-blue-500 h-4 text-xs sm:text-base" />
+            <ThumbUpIcon className="h-4" />
+          )}
+          <p
+            className={
+              likeicon
+                ? `text-blue-500 text-xs sm:text-base font-semibold`
+                : ` text-xs sm:text-base`
+            }
+          >
+            Like
+          </p>
         </div>
         <div className="flex border-t border-gray-200 items-center space-x-1 hover:bg-gray-100 cursor-pointer p-1 sm:p-2 flex-grow justify-center">
           <ChatAltIcon className="h-4" />
