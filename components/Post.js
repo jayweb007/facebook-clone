@@ -23,7 +23,8 @@ function Post({
   const time = moment(timestamp?.toDate().getTime()).format("LLL");
   const ref = db.collection("posts");
 
-  const likeButton = () => {
+  // LIKE POST
+  const likePost = () => {
     ref
       .doc(id)
       .update({ like: !likeicon })
@@ -31,6 +32,17 @@ function Post({
         console.error(err);
       });
   };
+
+  // DELETE POST
+  // const deletePost = () => {
+  //   ref
+  //     .doc(id)
+  //     .delete()
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+
+  // };
 
   return (
     <div className="flex flex-col">
@@ -91,7 +103,7 @@ function Post({
       rounded-b-2xl bg-white text-gray-400 "
       >
         <div
-          onClick={likeButton}
+          onClick={likePost}
           className="flex border-t border-gray-200 items-center space-x-1 hover:bg-gray-100 cursor-pointer p-1 sm:p-2 flex-grow rounded-bl-2xl justify-center"
         >
           {likeicon ? (
