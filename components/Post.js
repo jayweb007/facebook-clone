@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import { db } from "../firebase";
+import { useSession } from "next-auth/client";
 
 function Post({
   id,
@@ -22,9 +23,12 @@ function Post({
 }) {
   const time = moment(timestamp?.toDate().getTime()).format("LLL");
   const ref = db.collection("posts");
+  const [session] = useSession();
 
   // LIKE POST
   const likePost = () => {
+    if (!session) return null;
+
     ref
       .doc(id)
       .update({ like: !likeicon })
@@ -35,6 +39,8 @@ function Post({
 
   // DELETE POST
   // const deletePost = () => {
+  //  if (!session) return null;
+
   //   ref
   //     .doc(id)
   //     .delete()
