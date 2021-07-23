@@ -8,6 +8,8 @@ import {
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import Tooltip from "@material-ui/core/Tooltip";
 import { db } from "../firebase";
 import { useSession } from "next-auth/client";
 
@@ -38,17 +40,16 @@ function Post({
   };
 
   // DELETE POST
-  // const deletePost = () => {
-  //  if (!session) return null;
+  const deletePost = () => {
+    if (!session) return null;
 
-  //   ref
-  //     .doc(id)
-  //     .delete()
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-
-  // };
+    ref
+      .doc(id)
+      .delete()
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <div className="flex flex-col">
@@ -83,11 +84,17 @@ function Post({
               {/* space */}
             </div>
           </div>
-
-          <DotsHorizontalIcon
-            className=" p-2 h-10 w-10 text-gray-500 
+          <Tooltip onClick={deletePost} title="Delete Post" interactive>
+            {/* <DotsHorizontalIcon
+              className=" p-2 h-10 w-10 text-gray-500 
                 rounded-full cursor-pointer hover:bg-gray-200"
-          />
+            /> */}
+            <MoreHorizIcon
+              style={{ fontSize: 30 }}
+              className=" text-gray-500 
+                rounded-full cursor-pointer hover:bg-gray-200"
+            />
+          </Tooltip>
         </div>
 
         <p className="pt-4">{message}</p>
